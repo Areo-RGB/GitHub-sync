@@ -1,0 +1,6 @@
+{
+  "name": "Comet Card Showcase",
+  "description": "Mobile-first auto-looping Comet Card showcase carousel with inline video playback.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

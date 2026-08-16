@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #050505;
+  --card: #121212;
+  --accent: #3b82f6;
+  --text: #f9fafb;
+  --muted: #9ca3af;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  @keyframes comet-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes comet-pulse {
+    0%, 100% {
+      opacity: 0.6;
+      filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
+    }
+    50% {
+      opacity: 0.95;
+      filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.8));
+    }
+  }
+
+  @keyframes shimmer-sweep {
+    0% {
+      transform: translateX(-100%) rotate(25deg);
+    }
+    100% {
+      transform: translateX(200%) rotate(25deg);
+    }
+  }
+}
+
+.animate-comet-spin {
+  animation: comet-spin 6s linear infinite;
+}
+
+.animate-comet-pulse {
+  animation: comet-pulse 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer-sweep 3.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
