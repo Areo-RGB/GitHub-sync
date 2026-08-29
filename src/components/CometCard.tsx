@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Play, RotateCcw, Film, Eye, Heart } from 'lucide-react';
+import { Play, RotateCcw, Film } from 'lucide-react';
 import { ShowcaseCardItem } from '../types';
 import { cn } from '../lib/utils';
 
@@ -28,8 +28,6 @@ export const CometCard: React.FC<CometCardProps> = ({
   const [isBuffering, setIsBuffering] = useState<boolean>(false);
   const [hasError, setHasError] = useState<boolean>(false);
   const [showResetFeedback, setShowResetFeedback] = useState<boolean>(false);
-  const [liked, setLiked] = useState<boolean>(false);
-  const [likeCount, setLikeCount] = useState<number>(1890);
 
   // Sync video play/pause & reset
   useEffect(() => {
@@ -86,14 +84,6 @@ export const CometCard: React.FC<CometCardProps> = ({
       }
       setIsPlaying(true);
     }
-  };
-
-  const toggleLike = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setLiked((prev) => {
-      setLikeCount((c) => (prev ? c - 1 : c + 1));
-      return !prev;
-    });
   };
 
   return (
@@ -229,44 +219,23 @@ export const CometCard: React.FC<CometCardProps> = ({
             )}
           </div>
 
-          {/* ================= DIVIDER + SELECTION BAR BELOW ON CARD ================= */}
-          <div className="p-3 bg-[#121212] border-t border-[#222] flex items-center justify-between text-xs shrink-0">
-            <div className="flex items-center gap-2">
+          {/* ================= DIVIDER + AUTHOR BAR BELOW ON CARD ================= */}
+          <div className="p-3 bg-[#121212] border-t border-[#222] flex items-center text-xs shrink-0">
+            <div className="flex items-center gap-2.5">
               <img
                 src={card.author.avatar}
                 alt={card.author.name}
-                className="h-6 w-6 rounded-full object-cover ring-1 ring-[#3b82f6]/40"
+                className="h-7 w-7 rounded-full object-cover ring-1 ring-[#3b82f6]/40"
                 referrerPolicy="no-referrer"
               />
               <div className="text-[11px]">
                 <span className="font-medium text-[#f9fafb] block leading-none">
                   {card.author.name}
                 </span>
-                <span className="text-[10px] text-[#9ca3af] leading-tight">
+                <span className="text-[10px] text-[#9ca3af] leading-tight mt-0.5 block">
                   {card.author.role}
                 </span>
               </div>
-            </div>
-
-            <div className="flex items-center gap-2.5 text-[#9ca3af]">
-              <div className="flex items-center gap-1 text-[11px]">
-                <Eye className="h-3 w-3 text-[#9ca3af]/80" />
-                <span>{card.metrics?.views || '24K'}</span>
-              </div>
-              <button
-                data-stop-propagation="true"
-                onClick={toggleLike}
-                className={cn(
-                  'flex items-center gap-1 text-[11px] transition-colors cursor-pointer',
-                  liked ? 'text-rose-400' : 'text-[#9ca3af] hover:text-[#f9fafb]'
-                )}
-                aria-label="Like"
-              >
-                <Heart
-                  className={cn('h-3 w-3', liked && 'fill-rose-400 text-rose-400')}
-                />
-                <span>{likeCount.toLocaleString()}</span>
-              </button>
             </div>
           </div>
         </div>
